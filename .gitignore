@@ -1,0 +1,5 @@
+*.pdf
+*.ipynb
+__pycache__
+
+Versuche
