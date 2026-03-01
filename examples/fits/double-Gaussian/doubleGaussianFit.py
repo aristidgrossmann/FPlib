@@ -60,7 +60,6 @@ fit1_label = 'Double Gauss'
 
 plot_uncertainties = False
 exclude_zero_count_data_points = True
-
 compressed_Latex_output = True
 
 xlabels = 'Channel [-]'

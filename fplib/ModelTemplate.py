@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import numpy as np
 
 class ModelTemplate(ABC):
 
@@ -24,9 +23,9 @@ class ModelTemplate(ABC):
     def modelFunction(data, *params):
         pass
 
-    @classmethod
+    @staticmethod
     @abstractmethod  #must be defined when inheriting
-    def modelFunctionDerivative(cls, data, *params):
+    def modelFunctionDerivative(data, *params):
         pass
 
 
@@ -40,7 +39,7 @@ class ModelTemplate(ABC):
         return cls.MODEL_EQUATION_LATEX
     
     @classmethod
-    def getModelParameterLabels(cls) -> list[str]:
+    def getModelParameterLabels(cls, params = None) -> list[str]:
         return cls.MODEL_PARAMETER_LABELS
     
     @classmethod
@@ -72,7 +71,7 @@ class ModelTemplate(ABC):
             print("\t\t\t" + "\\hline")
 
             for i in range(noof_rows_1):
-                str_row = cls.MODEL_PARAMETER_LABELS[i]
+                str_row = cls.getModelParameterLabels(popt)[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
                 print("\t\t\t" + str_row)
@@ -90,7 +89,7 @@ class ModelTemplate(ABC):
             print("\t\t\t" + "\\hline")
 
             for i in range(noof_rows_2):
-                str_row = cls.MODEL_PARAMETER_LABELS[i+noof_rows_1]
+                str_row = cls.getModelParameterLabels(popt)[i+noof_rows_1]
                 str_row += ' & ' + f"{popt[i+ noof_rows_1]:.4g}" + ' $\\pm$ ' + f"{popt_std[i+noof_rows_1]:.4g}"
                 str_row += '\\\\'
                 print("\t\t\t" + str_row)
@@ -110,7 +109,7 @@ class ModelTemplate(ABC):
             print("\t\t\t" + "\\hline")
 
             for i in range(len(popt)):
-                str_row = cls.MODEL_PARAMETER_LABELS[i]
+                str_row = cls.getModelParameterLabels(popt)[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
                 print("\t\t\t" + str_row)

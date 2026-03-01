@@ -1,10 +1,10 @@
-from fplib.models.ModelTemplate import ModelTemplate
+from fplib.ModelTemplate import ModelTemplate
 import numpy as np
 
 class DoubleGaussian(ModelTemplate):
 
     MODEL_NAME = 'Double Gaussian'
-    MODEL_EQUATION_LATEX = "f(x) = C_1*\\exp(-\\frac{(x - \\mu_1)^2}{2 \\sigma_1^2}) + C_2*\\exp(-\\frac{(x - \\mu_2)^2}{2 \\sigma_2^2})"
+    MODEL_EQUATION_LATEX = "f(x) = C_1 e^{-\\frac{(x - \\mu_1)^2}{2 \\sigma_1^2}} + C_2 \\e^{-\\frac{(x - \\mu_2)^2}{2 \\sigma_2^2}}"
     MODEL_PARAMETER_LABELS = ["$C_1$", "$\\mu_1$", "$\\sigma_1$", "$C_2$", "$\\mu_2$", "$\\sigma_2$"]
     
     @staticmethod
@@ -13,8 +13,8 @@ class DoubleGaussian(ModelTemplate):
         gauss2 = const2*np.exp(-(data-mu2)**2 / (2*sigma2**2))
         return gauss1 + gauss2
     
-    @classmethod
-    def modelFunctionDerivative(cls, data, const1, mu1, sigma1, const2, mu2, sigma2):
+    @staticmethod
+    def modelFunctionDerivative(data, const1, mu1, sigma1, const2, mu2, sigma2):
         gauss1_derivative = const1 * np.exp(-(data - mu1)**2 / (2 * sigma1**2)) * (-(data - mu1) / sigma1**2)
         gauss2_derivative = const2 * np.exp(-(data - mu2)**2 / (2 * sigma2**2)) * (-(data - mu2) / sigma2**2)
         return gauss1_derivative + gauss2_derivative
@@ -43,7 +43,7 @@ class DoubleGaussian(ModelTemplate):
                 if i == 3:
                     print('\\hline')
                     str_row += "\\multirow{3}{*}{Background}"
-                str_row += '& ' + cls.MODEL_PARAMETER_LABELS[i]
+                str_row += '& ' + cls.getModelParameterLabels(popt)[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
                 print("\t\t\t" + str_row)
@@ -57,7 +57,7 @@ class DoubleGaussian(ModelTemplate):
                 if i == 3:
                     print('\\hline')
                     str_row += "\\multirow{3}{*}{Peak}"
-                str_row += '& ' + cls.MODEL_PARAMETER_LABELS[i]
+                str_row += '& ' + cls.getModelParameterLabels(popt)[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
                 print("\t\t\t" + str_row)

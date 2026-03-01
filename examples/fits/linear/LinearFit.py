@@ -25,7 +25,7 @@ os.chdir('..')
 
 
 ############################   PLOT RAW DATA   #######################################
-#########  SPECIFICATIONS   ##########
+#SPECIFICATIONS 
 xdata = x_exemplary
 ydata = y_exemplary 
 xerr = np.ones_like(xdata)*np.sqrt(1/12)
@@ -46,21 +46,21 @@ fpplot.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=
 
 
 ############################   FIT EXPONTENTIAL FUNCTION   #######################################
-#########  SPECIFICATIONS   ##########
+#SPECIFICATIONS 
 xdata = x_exemplary
 ydata = y_exemplary 
 xerr = np.ones_like(xdata)*np.sqrt(1/12)
 yerr = xerr
 
-model = Linear  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = Linear  #name of the model function
 p0 = [1]  #starting guess
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = True   
 
 fit1_label = 'linear fit'
 
 plot_uncertainties = True
+compressed_Latex_output = True
 
 
 xlabels = 'x [-]'
@@ -77,4 +77,5 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=x
                                                 optimize_starting_guess=optimize_starting_guess,  
                                                 fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
                                                 plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name)
+                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                compressed_Latex_output = compressed_Latex_output)

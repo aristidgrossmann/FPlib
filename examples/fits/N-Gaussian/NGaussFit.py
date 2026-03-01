@@ -30,7 +30,7 @@ os.chdir('..')
 lb = 0
 ub = 700
 
-#########  SPECIFICATIONS   ##########
+#SPECIFICATIONS 
 ydata = Z_without_absorber[0:len(background_noise_spectrum)] - background_noise_spectrum*2 
 xdata = np.arange(1, len(ydata)+1)
 ydata = ydata[lb:ub]
@@ -38,19 +38,19 @@ xdata = xdata[lb:ub]
 xerr = np.ones_like(xdata)*1/np.sqrt(12)
 yerr = np.sqrt(ydata)*1
 
-model = NGaussians #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = NGaussians #name of the model function
 p0 = [ 300, 1.93498813e+02,  3.37366915e+01, 
       350, 4.44602681e+01, 1.38779250e+01,  
       120,  4.30750490e+02, 7.15511361e+01, 
      20, 620, 50]  #starting guess (4 gaussians)
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = False   
 
 fit1_label = 'fit'
 
 plot_uncertainties = False
 exclude_zero_count_data_points = True
+compressed_Latex_output = True
 
 xlabels = 'Channel [-]'
 plot1_ylabel = 'Count rate [1/s]'
@@ -68,4 +68,5 @@ popt_gauss, popt_std_gauss, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=y
                                                 fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
                                                 plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
                                                 plot1_legend_loc=plot1_legend_loc, 
-                                                file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points)
+                                                file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points, 
+                                                compressed_Latex_output = compressed_Latex_output)

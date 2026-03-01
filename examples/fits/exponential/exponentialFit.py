@@ -77,18 +77,15 @@ ydata = noof_counts
 xerr = thickness_uncertainties
 yerr = np.sqrt(noof_counts)
 
-model = Exponential  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
-p0 = [5000, 0.2]  #starting guess
+model = Exponential 
+p0 = [5000, 0.2]  
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = True   
 
 fit1_label = 'exponential fit'
 
 plot_uncertainties = True
-
 compressed_Latex_output = True
-
 
 xlabels = 'Absorber thickness [mm]'
 plot1_ylabel = 'Counts [-]'

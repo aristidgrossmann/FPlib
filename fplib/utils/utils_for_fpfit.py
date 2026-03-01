@@ -1,6 +1,6 @@
 import numpy as np
 
-from fplib.models.ModelTemplate import ModelTemplate
+from fplib.ModelTemplate import ModelTemplate
 
 
 
@@ -128,7 +128,7 @@ def print_fit_data_to_latex(model: type[ModelTemplate], algorithm, p0, file_name
     print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
     print("")
 
-    print_correlation_table(pcorr, model.getModelParameterLabels())   #print correlation table
+    print_correlation_table(pcorr, model.getModelParameterLabels(popt))   #print correlation table
 
     print("\t" + "\\caption{Curvefit settings, optimized parameters and correlation between parameters}")
     print("\t" + "\\label{fig:fit_results}")
@@ -152,18 +152,11 @@ def print_compressed_fit_data_to_latex(model: type[ModelTemplate], chi2_dof, fil
     print("\t\t" + "\\textbf{Fit Function}")
     print("\t" + "\\end{minipage}%")
     print("\t" + "\\begin{minipage}[t]{0.75\\textwidth}")
-    print("\t\t" + f"{model.getName()} \\\\")
+    print("\t\t" + f"{model.getName()}: " + f"$\\displaystyle {model.getModelEquationLatex()}$" "\\\\")
     print("\t" + "\\end{minipage}")
     print("")
 
-
-    print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
-    print("")
-    
     model.print_curve_fit_popt_general(chi2_dof, popt, popt_std, peak_index)
-
-    print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
-    print("")
 
     print("\t" + "\\caption{Curvefit settings, optimized parameters and correlation between parameters}")
     print("\t" + "\\label{fig:fit_results}")

@@ -6,12 +6,9 @@ from contextlib import redirect_stdout
 
 
 from fplib.utils import utils_for_fpfit
-from fplib.models.ModelTemplate import ModelTemplate
+from fplib.ModelTemplate import ModelTemplate
 from fplib.models.Gaussian import Gaussian
 from fplib.models.DoubleGaussian import DoubleGaussian
-from fplib.models.LogLinear import LogLinear
-
-
 
 
 def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, optimize_starting_guess,  # data and optimization settings
@@ -123,7 +120,7 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
     print('------------------------------')
     # print parameters and uncertainties
     for i in range(len(popt)):
-        print(model.getModelParameterLabels()[i] , ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
+        print(model.getModelParameterLabels(popt)[i] , ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
 
 
     print('------------------------------')

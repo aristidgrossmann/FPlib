@@ -54,7 +54,6 @@ yerr = xerr
 model = Constant  #name of the model function 
 p0 = [1]  #starting guess
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = True   
 
 fit1_label = 'constant fit'
