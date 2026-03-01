@@ -18,11 +18,6 @@ def curve_fit_to_odr_wrapper(func):
 
 def print_curve_fit_settings(modelName, algorithm, p0, file_name):
 
-    print("\\begin{figure}[H]")
-    print("\t" + "\\centering")
-    print("\t" + "\includegraphics{" + file_name + ".pdf}")
-    print('')
-
     print("\t" + "% Label and Table 1: Settings")
     print("\t" + "\\begin{minipage}{0.2\\textwidth}")
     print("\t\t" + "\\textbf{Settings}")
@@ -112,6 +107,16 @@ def print_correlation_table(pcorr, popt_labels):
 
 
 def print_fit_data_to_latex(model: type[ModelTemplate], algorithm, p0, file_name, chi2_dof, popt, popt_std, pcorr, peak_index = None):
+
+    print("\\begin{figure}[H]")
+    print("\t" + "\\centering")
+    print("\t" + "\includegraphics{" + file_name + ".pdf}")
+    print('')
+
+    print("\t" + "\\begin{equation*}")
+    print("\t\t" + model.getModelEquationLatex())
+    print("\t" + "\\end{equation*}")
+    print("")
 
     print_curve_fit_settings(model.getName(), algorithm, p0, file_name)    #print curve fit settings
 
