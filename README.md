@@ -33,6 +33,30 @@ git clone git@github.com:aristidgrossmann/FPlib.git
 fplib is designed to be easily customized and extended, thats why no build instructions are described here.
 
 
+### Repository Structure
+
+<pre>
+FPlib/
+├── fplib/                       # contains the library
+│   ├── fpplot.py                # plotting functions
+│   ├── fpfit.py                 # curve fitting functions
+│   ├── ModelTemplate.py         # abstract model class (inherit from this when defining custom models)
+│   ├── utils/                   # utility functions used by fpplot and fpfit
+│   └── models/                  # lots of pre-defined models here 
+|
+├── examples/                    # examples 
+│   └── plots/                   # plotting examples
+│   └── fits/                    # curve fit examples
+|
+├── originalVersion/
+│   └── fp_library.py            #old and messy version (dont look at it)
+|
+├── .gitignore
+├── README.md
+└── requirements.txt
+
+</pre>
+---
 
 ## Plotting
 
@@ -54,7 +78,7 @@ From `fpplot` you have access to 4 methods:
 The 4 methods have the following **required arguments**: 
 
 
-| Argument | Required by | type |  Description |
+| Argument | Required by | Type |  Description |
 |------|------------|----------------|-----------|
 | `xdata` | all | `np.ndarray` | x data |
 | `ydata` | all | `np.ndarray` | y data |
@@ -74,14 +98,14 @@ The 4 methods have the following **required arguments**:
 Additionally, all 4 methods have the following **optional arguments**: 
 
 
-| Argument | Optional for | type |  Description |
+| Argument | Optional for | Type |  Description |
 |------|------------|----------------|-----------|
 | `xlims` | all | `tuple` | x axis limits. Default: `None`. Can be set to for example (2, 10) |
 | `ylims` | all | `tuple` | y axis limits. Default: `None`. Can be set to for example  (2, 10) |
 | `custom_plot` | all | `boolean` | Default: `False`. Setting to `True` returns the axes object, allowing further modifications |
 
 
-
+---
 
 
 ## Curve Fitting
@@ -94,9 +118,21 @@ from fplib import fpfit
 Inside `fpfit`, the function  `general_curve_fit` supports all-purpose curve fitting + redidual plots + LaTex figure code generation. 
 The code for LaTex figures is written to a .txt file with the same name as `file_name`.
 
+Its returns are:
+| Return variable | Type |  Description |
+|------|------------|----------------|
+| `popt` |  `np.ndarray` | optimized model parameters in the order that they were specified in |
+| `popt_std` |  `np.ndarray` | uncertainties on optimized model parameters in the same order |
+| `pcorr` |  `np.ndarray` | correlation matrix |
+
+They can be captured via 
+```python 
+popt, popt_std, pcorr = fpfit.general_curve_fit(....)
+```
+
 It has the following **required and optional arguments**: 
 
-| Argument | Required | type |  Description |
+| Argument | Required | Type |  Description |
 |------|------------|----------------|-----------|
 | `xdata` | yes | `np.ndarray` | x data |
 | `ydata` | yes | `np.ndarray` | y data |
@@ -107,21 +143,23 @@ It has the following **required and optional arguments**:
 | `fit1_label` | yes | `str` | label of the fit line (in the legend) |
 | `plot_uncertainties` | yes | `boolean` | `True`: plots uncertainties. `False`: only data points without error bars    |
 | `xlabels` | yes | `str` | x axis label |
-| `plot1_ylabel` | yes | `str` | y axis label of the fit plot |
-| `plot2_ylabel` | yes | `str` | y axis label of the Residual plot |
-| `plot1_title` | yes | `str` | Title of the plot |
-| `plot1_legend_loc` | yes | `str` | location of the zoom window, f.e.  `upper center`  (see matplotlib for options) |
+| `curveFitPlot_ylabel` | yes | `str` | y axis label of the fit plot |
+| `residualPlot_ylabel` | yes | `str` | y axis label of the Residual plot |
+| `plot_title` | yes | `str` | Title of the plot |
+| `legend_loc` | yes | `str` | location of the legend in the curve-fit-plot, f.e.  `upper center`  (see matplotlib for options) |
 | `file_name` | yes | `str` | file name under which the plot and the Latex figure code is saved |
 | `xlims` | optional | `tuple` | x axis limits. Default: `None`. Can be set to for example (2, 10) |
 | `ylims` | optional | `tiple` | y axis limits of the top plot. Default: `None`. Can be set to for example (2, 10) |
-| `custom_plot` | optional | `boolean` | Default: `False`. Setting to `True` returns the axes object, allowing further modifications |
+| `compressed_Latex_output` | optional | `bool` | Default: `True`. Setting to `False` prints more curve fit info (f.e. correlation) to the Latex txt output  |
+| `custom_plot` | optional | `boolean` | Default: `False`. Setting to `True` returns the axes objects of the curve fit and the residual plots, allowing further modifications |
+| `exclude_indices` | yes | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
+| `exclude_zero_count_data_points` | optional | 'boolean | Default: `False`. Set to `True` when working with count data (since 0-counts have zero uncertainty)  |
 | `peak_index` | optional | `int` | Only used when fitting `DoubleGaussian`. Can be set to `0` or `1` to specify which peak is the background|
 | `peak1_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
 | `peak2_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
-| `exclude_indices` | yes | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
-| `exclude_zero_count_data_points` | optional | 'boolean | Default: `False`. Set to `True` when working with count data (since 0-counts have zero uncertainty)  |
-| `compressed_Latex_output` | optional | `bool` | Default: `True`. Setting to `False` prints more curve fit info (f.e. correlation) to the Latex txt output  |
 
+
+---
 
 
 ### Models
