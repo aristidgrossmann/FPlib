@@ -5,7 +5,7 @@ import scipy.special
 class Voigt(ModelTemplate):
 
     MODEL_NAME = 'Voigt'
-    MODEL_EQUATION_LATEX = "$Convolution of Gaussian and Lorentzian"
+    MODEL_EQUATION_LATEX = "Convolution of Gaussian and Lorentzian"
     MODEL_PARAMETER_LABELS = ["$C$", "$\\mu$", "$\\sigma$", "$\\gamma$"]
     
     @staticmethod

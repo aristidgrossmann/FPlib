@@ -6,7 +6,7 @@ import numpy as np
 class NVoigt(ModelTemplate):
 
     MODEL_NAME = 'N Voigt distributions'
-    MODEL_EQUATION_LATEX = "$f(x) = \\sum_{i = 1}^{N} Voigt(C_i, \\mu_i, \\sigma_i, \\gamma_i)$"
+    MODEL_EQUATION_LATEX = "f(x) = \\sum_{i = 1}^{N} Voigt(C_i, \\mu_i, \\sigma_i, \\gamma_i)"
     MODEL_PARAMETER_LABELS = []
     
     @staticmethod

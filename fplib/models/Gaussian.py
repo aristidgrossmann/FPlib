@@ -4,7 +4,7 @@ import numpy as np
 class Gaussian(ModelTemplate):
 
     MODEL_NAME = 'Gaussian'
-    MODEL_EQUATION_LATEX = "$f(x) = C*\\exp(-\\frac{(x - \\mu)^2}{2 \\sigma^2})$"
+    MODEL_EQUATION_LATEX = "f(x) = C*\\exp(-\\frac{(x - \\mu)^2}{2 \\sigma^2})"
     MODEL_PARAMETER_LABELS = ["$C$", "$\\mu$", "\\sigma"]
     
     @staticmethod

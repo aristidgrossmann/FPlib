@@ -6,7 +6,7 @@ import numpy as np
 class NGaussians(ModelTemplate):
 
     MODEL_NAME = 'N Gaussians'
-    MODEL_EQUATION_LATEX = "$f(x) = \\sum_{i = 1}^{N} C_i*\\exp(-\\frac{(x - \\mu_i)^2}{2 \\sigma_i^2})$"
+    MODEL_EQUATION_LATEX = "f(x) = \\sum_{i = 1}^{N} C_i*\\exp(-\\frac{(x - \\mu_i)^2}{2 \\sigma_i^2})"
     MODEL_PARAMETER_LABELS = []
     
     @staticmethod

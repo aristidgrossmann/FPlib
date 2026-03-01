@@ -4,7 +4,7 @@ import numpy as np
 class Constant(ModelTemplate):
 
     MODEL_NAME = 'Constant'
-    MODEL_EQUATION_LATEX = "$f(x) = C$"
+    MODEL_EQUATION_LATEX = "f(x) = C"
     MODEL_PARAMETER_LABELS = ["$C$"]
 
     @staticmethod

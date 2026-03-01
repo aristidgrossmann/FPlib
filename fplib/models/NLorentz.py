@@ -6,7 +6,7 @@ import numpy as np
 class NLorentz(ModelTemplate):
 
     MODEL_NAME = 'N Lorentz distributions'
-    MODEL_EQUATION_LATEX = "$f(x) = \\sum_{i = 1}^{N} \\frac{C_i \\gamma_i}{2\\pi (x - x_{0,i})^2 + \\gamma_i^2/4}$"
+    MODEL_EQUATION_LATEX = "f(x) = \\sum_{i = 1}^{N} \\frac{C_i \\gamma_i}{2\\pi (x - x_{0,i})^2 + \\gamma_i^2/4}"
     MODEL_PARAMETER_LABELS = []
     
     @staticmethod

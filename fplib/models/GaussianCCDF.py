@@ -6,7 +6,7 @@ import scipy.special
 class GaussianCCDF(ModelTemplate):
 
     MODEL_NAME = 'Gaussian CCDF'
-    MODEL_EQUATION_LATEX = "$f(x) = \\frac{C}{2} \\left(1 - \\Phi(\\mu, \\sigma) \\right)$"
+    MODEL_EQUATION_LATEX = "f(x) = \\frac{C}{2} \\left(1 - \\Phi(\\mu, \\sigma) \\right)"
     MODEL_PARAMETER_LABELS = ["$C$", "$\\mu$", "\\sigma"]
     
     @staticmethod

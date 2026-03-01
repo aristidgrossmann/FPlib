@@ -4,7 +4,7 @@ import numpy as np
 class DoubleGaussian(ModelTemplate):
 
     MODEL_NAME = 'Double Gaussian'
-    MODEL_EQUATION_LATEX = "$f(x) = C_1*\\exp(-\\frac{(x - \\mu_1)^2}{2 \\sigma_1^2}) + C_2*\\exp(-\\frac{(x - \\mu_2)^2}{2 \\sigma_2^2})$"
+    MODEL_EQUATION_LATEX = "f(x) = C_1*\\exp(-\\frac{(x - \\mu_1)^2}{2 \\sigma_1^2}) + C_2*\\exp(-\\frac{(x - \\mu_2)^2}{2 \\sigma_2^2})"
     MODEL_PARAMETER_LABELS = ["$C_1$", "$\\mu_1$", "$\\sigma_1$", "$C_2$", "$\\mu_2$", "$\\sigma_2$"]
     
     @staticmethod

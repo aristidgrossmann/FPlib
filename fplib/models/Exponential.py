@@ -4,7 +4,7 @@ import numpy as np
 class Exponential(ModelTemplate):
 
     MODEL_NAME = 'exponential'
-    MODEL_EQUATION_LATEX = "$f(x) = C \\exp(-\\mu x) $"
+    MODEL_EQUATION_LATEX = "f(x) = C \\exp(-\\mu x)"
     MODEL_PARAMETER_LABELS = ["$C$", "$\\mu$"]
 
     @staticmethod
