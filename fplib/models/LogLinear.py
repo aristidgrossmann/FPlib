@@ -1,4 +1,3 @@
-from fplib.models.ModelTemplate import ModelTemplate
 from fplib.models.Exponential import Exponential
 import numpy as np
 

@@ -1,6 +1,6 @@
 import numpy as np
 
-from fplib.models.ModelTemplate import ModelTemplate
+from fplib.ModelTemplate import ModelTemplate
 
 
 

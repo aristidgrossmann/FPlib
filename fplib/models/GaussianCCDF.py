@@ -1,4 +1,4 @@
-from fplib.models.ModelTemplate import ModelTemplate
+from fplib.ModelTemplate import ModelTemplate
 from fplib.models.Gaussian import Gaussian
 import numpy as np
 import scipy.special
