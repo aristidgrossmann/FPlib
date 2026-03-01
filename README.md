@@ -4,11 +4,11 @@
 fplib is a data plotting and curve-fitting library. It
 
 - automates the redundant and time-consuming raw data plots, curve-fitting, residual plots and Latex-figure-Creation tasks
-into ~10 lines that can simply be copy-pasted every time
+into ~10 lines which can simply be copy-pasted every time
 - prints full latex code for curve-fitting figure + results for direct copy-paste into Overleaf
-- specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
+- is specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
 and by extension, the "Fortgeschrittenenpraktikum (FP)"
-- lots of pre-defined models, but also enables easy custom model definitions
+- has lots of pre-defined models, but also enables easy custom model definitions
 
 From the FP lectures, it copies exactly the color scheme, font size, figure format and size, labels, and 
 lists optimized parameter results and $\chi^2 /N_{dof}$ in a structured way. 
