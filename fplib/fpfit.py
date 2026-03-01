@@ -123,7 +123,7 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
     print('------------------------------')
     # print parameters and uncertainties
     for i in range(len(popt)):
-        print(model.getModelParameterLabels()[i] , ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
+        print(model.getModelParameterLabels(popt)[i] , ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
 
 
     print('------------------------------')
