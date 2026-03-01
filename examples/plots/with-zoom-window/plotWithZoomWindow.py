@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-from src import fp_library
+from fplib import fpplot
 # endregion
 
 
@@ -40,7 +40,7 @@ zoom_ylim = (-100, 250)  # Zoomed y range
 scaling_factor = 2    #scales the size of the zoomed window
 zoom_window_position = "center right"  # Position of the zoom window
 
-fp_library.plot_raw_data_no_uncertainty_zoom_window(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
+fpplot.plot_raw_data_no_uncertainty_zoom_window(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
             legend_loc=legend_loc, file_name=file_name, zoom_xlim=zoom_xlim, zoom_ylim=zoom_ylim, 
             scaling_factor=scaling_factor, zoom_window_position=zoom_window_position)
 
@@ -66,7 +66,7 @@ zoom_ylim = (-100, 250)  # Zoomed y range
 scaling_factor = 0   #scales the size of the zoomed window
 zoom_window_position = "center right"  # Position of the zoom window
 
-fp_library.plot_raw_data_no_uncertainty_zoom_window(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
+fpplot.plot_raw_data_no_uncertainty_zoom_window(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
             legend_loc=legend_loc, file_name=file_name, zoom_xlim=zoom_xlim, zoom_ylim=zoom_ylim, 
             scaling_factor=scaling_factor, zoom_window_position=zoom_window_position)
 
