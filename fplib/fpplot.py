@@ -28,13 +28,13 @@ from fplib.utils import utils_for_fpplot
 def plot_raw_data_no_uncertainty(xdata, ydata, title, xlabel, ylabel, legend_loc, file_name, custom_plot = False, xlims = None, ylims = None):
 
 
-    fig, ax = plt.subplots(figsize = (6, 4.5))
+    fig, ax = plt.subplots(figsize = (4.5, 3.5))
     ax.scatter(xdata, ydata, s=8, label = 'Data', color = '#1f77b4')
-    ax.set_xlabel(xlabel, fontsize = 12)
-    ax.set_ylabel(ylabel, fontsize = 12)
-    ax.tick_params(axis='both', labelsize=12)
-    ax.set_title(title, fontsize = 13)
-    ax.legend(loc = legend_loc, fontsize = 12)
+    ax.set_xlabel(xlabel, fontsize = 10)
+    ax.set_ylabel(ylabel, fontsize = 10)
+    ax.tick_params(axis='both', labelsize=10)
+    ax.set_title(title, fontsize = 11)
+    ax.legend(loc = legend_loc, fontsize = 10)
     ax.grid(True)
 
     if xlims is not None:
@@ -42,10 +42,10 @@ def plot_raw_data_no_uncertainty(xdata, ydata, title, xlabel, ylabel, legend_loc
     if ylims is not None:
         ax.set_ylim(ylims)
 
-    file_name += '.pdf'
-
+    plt.tight_layout()
+    
     if custom_plot == False:
-        plt.savefig(file_name, format='pdf', bbox_inches='tight')
+        plt.savefig(file_name + '.pdf', format='pdf', bbox_inches='tight')
 
         plt.show()
     else:
@@ -55,15 +55,15 @@ def plot_raw_data_no_uncertainty(xdata, ydata, title, xlabel, ylabel, legend_loc
 def plot_raw_data_no_uncertainty_zoom_window(xdata, ydata, title, xlabel, ylabel, legend_loc, file_name, #data and plot
                                              zoom_xlim, zoom_ylim, scaling_factor, zoom_window_position, custom_plot = False, xlims = None, ylims = None):
 
-    fig, ax = plt.subplots(figsize=(6, 4.5))
+    fig, ax = plt.subplots(figsize=(4.5, 3.5))
 
     # Plot the main data with error bars
     ax.scatter(xdata, ydata, s=8, label = 'Data', color = '#1f77b4')
-    ax.set_xlabel(xlabel, fontsize = 12)
-    ax.set_ylabel(ylabel, fontsize = 12)
-    ax.tick_params(axis='both', labelsize=12)
-    ax.set_title(title, fontsize = 13)
-    ax.legend(loc = legend_loc, fontsize = 12)
+    ax.set_xlabel(xlabel, fontsize = 10)
+    ax.set_ylabel(ylabel, fontsize = 10)
+    ax.tick_params(axis='both', labelsize=10)
+    ax.set_title(title, fontsize = 11)
+    ax.legend(loc = legend_loc, fontsize = 10)
     ax.grid(True)
 
     if xlims is not None:
@@ -125,12 +125,12 @@ def plot_raw_data_no_uncertainty_zoom_window(xdata, ydata, title, xlabel, ylabel
         inset_ax = None
 
 
+    plt.tight_layout()
 
 
-    file_name += '.pdf'
 
     if custom_plot == False:
-        plt.savefig(file_name, format='pdf', bbox_inches='tight')
+        plt.savefig(file_name + '.pdf', format='pdf', bbox_inches='tight')
         plt.show()
     else:
         return ax, inset_ax
@@ -140,7 +140,7 @@ def plot_raw_data_no_uncertainty_zoom_window(xdata, ydata, title, xlabel, ylabel
 
 
 def plot_raw_data_with_uncertainty(xdata, ydata, xerr, yerr, title, xlabel, ylabel, legend_loc, file_name, custom_plot = False, xlims = None, ylims = None):
-    fig, ax = plt.subplots(figsize = (6, 4.5))
+    fig, ax = plt.subplots(figsize = (4.5, 3.5))
 
     if(np.all(xerr == 0)):
         ax.errorbar(xdata, ydata, yerr = yerr, fmt='.',elinewidth = 1.5,  markersize = 10, capsize=0, label = 'Data', color = '#1f77b4')
@@ -148,11 +148,11 @@ def plot_raw_data_with_uncertainty(xdata, ydata, xerr, yerr, title, xlabel, ylab
         ax.errorbar(xdata, ydata, xerr = xerr, fmt='.',elinewidth = 1.5,  markersize = 10, capsize=0, label = 'Data', color = '#1f77b4')
     else:
         ax.errorbar(xdata, ydata, xerr = xerr, yerr = yerr, fmt='.',elinewidth = 1.5,  markersize = 10, capsize=0, label = 'Data', color = '#1f77b4')
-    ax.set_xlabel(xlabel, fontsize = 12)
-    ax.set_ylabel(ylabel, fontsize = 12)
-    ax.tick_params(axis='both', labelsize=12)
-    ax.set_title(title, fontsize = 13)
-    ax.legend(loc = legend_loc, fontsize = 12)
+    ax.set_xlabel(xlabel, fontsize = 10)
+    ax.set_ylabel(ylabel, fontsize = 10)
+    ax.tick_params(axis='both', labelsize=10)
+    ax.set_title(title, fontsize = 11)
+    ax.legend(loc = legend_loc, fontsize = 10)
     ax.grid(True)
 
     if xlims is not None:
@@ -160,10 +160,10 @@ def plot_raw_data_with_uncertainty(xdata, ydata, xerr, yerr, title, xlabel, ylab
     if ylims is not None:
         ax.set_ylim(ylims)
     
-    file_name += '.pdf'
+    plt.tight_layout()
 
     if custom_plot == False:
-        plt.savefig(file_name, format='pdf', bbox_inches='tight')
+        plt.savefig(file_name + '.pdf', format='pdf', bbox_inches='tight')
         plt.show()
     else:
         return ax
@@ -174,7 +174,7 @@ def plot_raw_data_with_uncertainty(xdata, ydata, xerr, yerr, title, xlabel, ylab
 def plot_raw_data_with_uncertainty_zoom_window(xdata, ydata, xerr, yerr, title, xlabel, ylabel, legend_loc, file_name, #data and plot
                                              zoom_xlim, zoom_ylim, scaling_factor, zoom_window_position, custom_plot = False, xlims = None, ylims = None):
     
-    fig, ax = plt.subplots(figsize=(6, 4.5))
+    fig, ax = plt.subplots(figsize=(4.5, 3.5))
 
     # Plot the main data with error bars
     if(np.all(xerr == 0)):
@@ -183,11 +183,11 @@ def plot_raw_data_with_uncertainty_zoom_window(xdata, ydata, xerr, yerr, title, 
         ax.errorbar(xdata, ydata, xerr=xerr, fmt='.', elinewidth=1.5,  markersize = 10, capsize=0, color = '#1f77b4', label = 'Data')
     else:
         ax.errorbar(xdata, ydata, xerr=xerr, yerr=yerr, fmt='.', elinewidth=1.5,  markersize = 10, capsize=0, color = '#1f77b4', label = 'Data')
-    ax.set_xlabel(xlabel, fontsize = 12)
-    ax.set_ylabel(ylabel, fontsize = 12)
-    ax.tick_params(axis='both', labelsize=12)
-    ax.set_title(title, fontsize = 13)
-    ax.legend(loc = legend_loc, fontsize = 12)
+    ax.set_xlabel(xlabel, fontsize = 10)
+    ax.set_ylabel(ylabel, fontsize = 10)
+    ax.tick_params(axis='both', labelsize=10)
+    ax.set_title(title, fontsize = 11)
+    ax.legend(loc = legend_loc, fontsize = 10)
     ax.grid(True)
 
     if xlims is not None:
@@ -231,9 +231,6 @@ def plot_raw_data_with_uncertainty_zoom_window(xdata, ydata, xerr, yerr, title, 
         inset_ax.set_xticklabels([])
         inset_ax.set_yticklabels([])
 
-        # Ensure the inset stays within the bounds of the figure
-        plt.tight_layout()
-
         ### draw connecting line 
 
         # Convert the zoom window position to real coordinates
@@ -248,13 +245,10 @@ def plot_raw_data_with_uncertainty_zoom_window(xdata, ydata, xerr, yerr, title, 
     else: 
         inset_ax = None
 
-
-
-
-    file_name += '.pdf'
+    plt.tight_layout()
 
     if custom_plot == False:
-        plt.savefig(file_name, format='pdf', bbox_inches='tight')
+        plt.savefig(file_name + '.pdf', format='pdf', bbox_inches='tight')
         plt.show()
     else:
         return ax, inset_ax
