@@ -16,7 +16,7 @@ def curve_fit_to_odr_wrapper(func):
 
 #################################    PRINTING ANALYSIS TABLE TO LATEX   ##############################
 
-def print_curve_fit_settings(modelName, algorithm, p0, file_name):
+def print_curve_fit_settings(modelName, algorithm, p0):
 
     print("\t" + "% Label and Table 1: Settings")
     print("\t" + "\\begin{minipage}{0.2\\textwidth}")
@@ -110,7 +110,7 @@ def print_fit_data_to_latex(model: type[ModelTemplate], algorithm, p0, file_name
 
     print("\\begin{figure}[H]")
     print("\t" + "\\centering")
-    print("\t" + "\includegraphics{" + file_name + ".pdf}")
+    print("\t" + "\\includegraphics{" + file_name + ".pdf}")
     print('')
 
     print("\t" + "\\begin{equation*}")
@@ -118,7 +118,7 @@ def print_fit_data_to_latex(model: type[ModelTemplate], algorithm, p0, file_name
     print("\t" + "\\end{equation*}")
     print("")
 
-    print_curve_fit_settings(model.getName(), algorithm, p0, file_name)    #print curve fit settings
+    print_curve_fit_settings(model.getName(), algorithm, p0)    #print curve fit settings
 
     print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
     print("")
@@ -129,6 +129,41 @@ def print_fit_data_to_latex(model: type[ModelTemplate], algorithm, p0, file_name
     print("")
 
     print_correlation_table(pcorr, model.getModelParameterLabels())   #print correlation table
+
+    print("\t" + "\\caption{Curvefit settings, optimized parameters and correlation between parameters}")
+    print("\t" + "\\label{fig:fit_results}")
+    print("\\end{figure}") 
+
+    return None
+
+
+
+def print_compressed_fit_data_to_latex(model: type[ModelTemplate], chi2_dof, file_name, popt, popt_std, peak_index = None):
+
+    print("\\begin{figure}[H]")
+    print("\t" + "\\centering")
+    print("\t" + "\\includegraphics{" + file_name + ".pdf}")
+    print('')
+
+
+
+    print("\t" + "% Label and Table 1: Settings")
+    print("\t" + "\\begin{minipage}[t]{0.2\\textwidth}")
+    print("\t\t" + "\\textbf{Fit Function}")
+    print("\t" + "\\end{minipage}%")
+    print("\t" + "\\begin{minipage}[t]{0.75\\textwidth}")
+    print("\t\t" + f"{model.getName()} \\\\")
+    print("\t" + "\\end{minipage}")
+    print("")
+
+
+    print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
+    print("")
+    
+    model.print_curve_fit_popt_general(chi2_dof, popt, popt_std, peak_index)
+
+    print("\t" + "\\vspace{0.1cm} % Add vertical space between tables")
+    print("")
 
     print("\t" + "\\caption{Curvefit settings, optimized parameters and correlation between parameters}")
     print("\t" + "\\label{fig:fit_results}")

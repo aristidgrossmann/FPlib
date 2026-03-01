@@ -20,7 +20,8 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
                     custom_plot = False,   # if true, the plots axis object is returned 
                     peak_index = None, peak1_label = None, peak2_label = None,  #when fitting double gaussian
                     exclude_indices = None, #indices of the data points that are not accounted for when fitting
-                    exclude_zero_count_data_points = False  # exclude 0 counts (they have variance 0 according to Poisson distrib)
+                    exclude_zero_count_data_points = False,  # exclude 0 counts (they have variance 0 according to Poisson distrib)
+                    compressed_Latex_output = False    # only outputs Fit model name, chi^2 and optimized parameters (no correlation, etc)
                     ):
     
     ###################################################################################
@@ -117,10 +118,15 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
             p0_str += f"{p0[i]:.4g}" + ', '
     print('Starting guess:  ', p0_str)
 
+    print('chi2/dof:   ', f"{chi2_dof:.4g}")
+
+    print('------------------------------')
     # print parameters and uncertainties
     for i in range(len(popt)):
-        print('parameter ', i+1, ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
+        print(model.getModelParameterLabels()[i] , ': ', f"{popt[i]:.4g}", ' $\\pm$ ', f"{popt_std[i]:.4g}")
 
+
+    print('------------------------------')
     #print correlation
     print('Correlation:')
     for i in range(len(popt)):
@@ -132,11 +138,7 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
                 corr_str += f"{pcorr[i][j]:.4g}" + ' & '
         print(corr_str)
 
-    #print chi2/dof
-    print('chi2/dof:   ', f"{chi2_dof:.4g}")
-
-    print('--------------------------')
-
+    print('------------------------------')
 
     # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(4.5,4), sharex=True, gridspec_kw={'height_ratios': [2.2, 1]})
@@ -245,7 +247,12 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
     #print results to latex
     with open(file_name + "-LatexFigure.txt", "w") as latexOutputFile:
         with redirect_stdout(latexOutputFile):
-            utils_for_fpfit.print_fit_data_to_latex(model, algorithm, p0, file_name, chi2_dof, popt, popt_std,  pcorr, peak_index)
+
+            if compressed_Latex_output: 
+                utils_for_fpfit.print_compressed_fit_data_to_latex(model, chi2_dof, file_name, popt, popt_std, peak_index)
+            
+            else: #full latex output
+                utils_for_fpfit.print_fit_data_to_latex(model, algorithm, p0, file_name, chi2_dof, popt, popt_std,  pcorr, peak_index)
 
 
     if custom_plot == False:
