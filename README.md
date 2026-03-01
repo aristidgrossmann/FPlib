@@ -4,6 +4,7 @@
 fplib is a data plotting and curve-fitting library. It
 
 - automates the redundant and time-consuming raw data plots, curve-fitting, residual plots and Latex-figure-Creation tasks
+into ~10 lines that can simply be copy-pasted every time
 - prints full latex code for curve-fitting figure + results for direct copy-paste into Overleaf
 - specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
 and by extension, the "Fortgeschrittenenpraktikum (FP)"
@@ -181,11 +182,11 @@ class CustomModel(ModelTemplate)  #inherit from ModelTemplate
 
     @staticmethod
     def modelFunction(data, A, omega, phi, a_0, a_1, a_2):   #must be in the order data, *params
-        return A * np.cos(omega *data + phi) + a_0 + a_1 *x + a_2 * x**2
+        return A * np.cos(omega *data + phi)**2 + a_0 + a_1 *x + a_2 * x**2
     
     @staticmethod
     def modelFunctionDerivative(data, C, mu, sigma):   #must be in the order data, *params
-        return - A*omega* np.sin(omega *data + phi)  + a_1 + 2*a_2
+        return - 2*A*omega* np.sin(omega *data + phi)*np.cos(omega *data + phi)  + a_1 + 2*a_2
 ```
 After that, you can simply import your model and pass it to the all-purpose curve fit function `fpfit.general_curve_fit`. For example, if your model is inside a file named `CustomModel.py` inside the `models` folder, simply import it via 
 ```python 
