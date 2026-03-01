@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-print(sys.path)
+
 from fplib import fpplot
 # endregion
 
@@ -19,7 +19,8 @@ organic_data = np.genfromtxt('Organic Szin.txt')
 channels = np.arange(1, len(organic_data)+1)
 
 
-os.chdir('..')
+os.chdir('../..')
+os.chdir('xyLimits')
 
 
 

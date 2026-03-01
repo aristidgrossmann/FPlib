@@ -37,7 +37,7 @@ zoom_xlim = (320, 400)  # Zoomed x range
 zoom_ylim = (-100, 250)  # Zoomed y range
 
 # Zoom window size and position
-scaling_factor = 2    #scales the size of the zoomed window
+scaling_factor = 1    #scales the size of the zoomed window
 zoom_window_position = "center right"  # Position of the zoom window
 
 fpplot.plot_raw_data_no_uncertainty_zoom_window(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 

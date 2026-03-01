@@ -70,7 +70,7 @@ zoom_xlim = (320, 400)  # Zoomed x range
 zoom_ylim = (-100, 250)  # Zoomed y range
 
 # Zoom window size and position
-scaling_factor = 2    #scales the size of the zoomed window
+scaling_factor = 1    #scales the size of the zoomed window
 zoom_window_position = "center right"  # Position of the zoom window
 
 custom_plot = True  #returns all axes objects (in case of the zoom window, 2 objects)
