@@ -199,6 +199,25 @@ Also, if you define a model whose number of input parameters is not fixed, you h
 
 
 
+--- 
+
+
+
+### Curve Fit Methodology
+In analogy to the `Praktikumsbibliothek` provided for the GP (see https://grundpraktikum.physik.rwth-aachen.de/software/), curve fits of a function $f(x|\boldsymbol{a})$ with parameters $\boldsymbol{a}$ on data with uncertainty only on the y-value $\sigma_y$ by minimizing 
+$\chi^2 = \sum_i \frac{(y_i - f(x_i|\boldsymbol{a}))^2}{\sigma_{y,i}^2}$.
+The function $\mathrm{scipy.optimize.curve \\_fit}$ is used to solve the minimization problem. 
+
+When presented with uncertainty in the x and y values simultaneously, the Orthogonal Distance Regression (ODR) method  is used, which minimizes a similar objective function. To solve the minimization problem numerically, the algorithm $\mathrm{scipy.odr}$ in analogy to the `Praktikumsbibliothek` is utilized.
+
+In accordance with the GP protocol guidelines, the fit parameters and their standard deviations are reported. After consulting the FP advisors, correlations are not reported.
+
+To quantify the quality of our fit, the value for normalized
+$\chi^2/N_{\mathrm{dof}} = \frac{1}{N_{\mathrm{dof}}}\sum_i \frac{(y_i - f(x_i|\textbf{a}))^2}{\sigma_{y,i}^2 + (f'(x_i|\textbf{a})\sigma_{x,i})^2}$ is reported.
+
+
+Additionally, the residuals $y_i - f(x_i|\textbf{a})$ with the uncertainty $\sqrt{\sigma_{y,i}^2 + (f'(x_i|\textbf{a})\sigma_{x,i})^2}$ are plotted, in analogy to the GP guidelines.
+
 
 
 
