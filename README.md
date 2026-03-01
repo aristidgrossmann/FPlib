@@ -130,7 +130,7 @@ They can be captured via
 popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 ```
 
-It has the following **required and optional arguments**: 
+`general_curve_fit` has the following **required and optional arguments**: 
 
 | Argument | Required | Type |  Description |
 |------|------------|----------------|-----------|
