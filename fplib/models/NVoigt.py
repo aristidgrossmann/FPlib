@@ -7,7 +7,7 @@ class NVoigt(ModelTemplate):
 
     MODEL_NAME = 'N Voigt distributions'
     MODEL_EQUATION_LATEX = "f(x) = \\sum_{i = 1}^{N} Voigt(C_i, \\mu_i, \\sigma_i, \\gamma_i)"
-    MODEL_PARAMETER_LABELS = []
+    MODEL_PARAMETER_LABELS = []  #same order as Voigt (is filled at runtime)
     
     @staticmethod
     def modelFunction(data, *params):
