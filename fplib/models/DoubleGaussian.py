@@ -21,18 +21,17 @@ class DoubleGaussian(ModelTemplate):
     
     @classmethod
     def print_curve_fit_popt_general(cls, chi2_dof, popt, popt_std, peak_index) -> None:
-        print("\\vspace{0.1cm} % Add vertical space between tables")
-        print("")
-        print("% Label and Table 2: Results")
-        print("\\begin{minipage}{0.2\\textwidth}")
-        print("\\textbf{Results}")
-        print("\\end{minipage}%")
-        print("\\begin{minipage}{0.75\\textwidth}")
-        print("\\begin{tabular}{c|c|c}")
-        print("\\hline")
-        print("\\hline")
-        print(f"& $\\chi^2/N_{{\\text{{dof}}}}$ & {chi2_dof:.4g} \\\\")
-        print("\\hline")
+
+        print("\t" + "% Label and Table 2: Results")
+        print("\t" + "\\begin{minipage}{0.2\\textwidth}")
+        print("\t\t" + "\\textbf{Results}")
+        print("\t" + "\\end{minipage}%")
+        print("\t" + "\\begin{minipage}{0.75\\textwidth}")
+        print("\t\t" + "\\begin{tabular}{c|c|c}")
+        print("\t\t\t" + "\\hline")
+        print("\t\t\t" + "\\hline")
+        print("\t\t\t" + f"& $\\chi^2/N_{{\\text{{dof}}}}$ & {chi2_dof:.4g} \\\\")
+        print("\t\t\t" + "\\hline")
 
         ### print optimized values
         if peak_index == 0:
@@ -47,7 +46,7 @@ class DoubleGaussian(ModelTemplate):
                 str_row += '& ' + cls.MODEL_PARAMETER_LABELS[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
-                print(str_row)
+                print("\t\t\t" + str_row)
 
         else: 
             for i in range(len(popt)):
@@ -61,14 +60,12 @@ class DoubleGaussian(ModelTemplate):
                 str_row += '& ' + cls.MODEL_PARAMETER_LABELS[i]
                 str_row += ' & ' + f"{popt[i]:.4g}" + ' $\\pm$ ' + f"{popt_std[i]:.4g}"
                 str_row += '\\\\'
-                print(str_row)
+                print("\t\t\t" + str_row)
 
-        print("\\hline")
-        print("\\hline")
-        print("\\end{tabular}")
-        print("\\end{minipage}")
-        print("")
-        print("\\vspace{0.1cm} % Add vertical space between tables")
+        print("\t\t\t" + "\\hline")
+        print("\t\t\t" + "\\hline")
+        print("\t\t" + "\\end{tabular}")
+        print("\t" + "\\end{minipage}")
         print("")
 
         return None

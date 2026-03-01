@@ -61,6 +61,8 @@ fit1_label = 'Double Gauss'
 plot_uncertainties = False
 exclude_zero_count_data_points = True
 
+compressed_Latex_output = True
+
 xlabels = 'Channel [-]'
 plot1_ylabel = 'Counts [-]'
 plot2_ylabel = 'Residuum [-]'
@@ -79,7 +81,9 @@ popt, popt_std, popt_corr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata,
                      fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, plot1_ylabel=plot1_ylabel, 
                      plot2_ylabel=plot2_ylabel, plot1_title=plot1_title, 
                      plot1_legend_loc=plot1_legend_loc, 
-                     file_name=file_name, peak_index=peak_index)
+                     file_name=file_name, peak_index=peak_index, 
+                     compressed_Latex_output=compressed_Latex_output)
+
 
 
 
@@ -97,7 +101,8 @@ popt, popt_std, popt_corr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata,
                      fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, plot1_ylabel=plot1_ylabel, 
                      plot2_ylabel=plot2_ylabel, plot1_title=plot1_title, 
                      plot1_legend_loc=plot1_legend_loc,
-                     file_name=file_name, peak1_label=peak1_label, peak2_label=peak2_label)
+                     file_name=file_name, peak1_label=peak1_label, peak2_label=peak2_label, 
+                     compressed_Latex_output=compressed_Latex_output)
 
 
 
@@ -108,8 +113,8 @@ popt, popt_std, popt_corr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata,
                         xerr=xerr, yerr=yerr, model=model, p0=p0, optimize_starting_guess=optimize_starting_guess,  
                      fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, plot1_ylabel=plot1_ylabel, 
                      plot2_ylabel=plot2_ylabel, plot1_title=plot1_title, 
-                     plot1_legend_loc=plot1_legend_loc, 
-                     file_name=file_name)
+                     plot1_legend_loc=plot1_legend_loc, exclude_zero_count_data_points=exclude_zero_count_data_points, 
+                     file_name=file_name, compressed_Latex_output=compressed_Latex_output)
 
 
 
@@ -123,7 +128,8 @@ popt, popt_std, popt_corr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata,
                      fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, plot1_ylabel=plot1_ylabel, 
                      plot2_ylabel=plot2_ylabel, plot1_title=plot1_title, 
                      plot1_legend_loc=plot1_legend_loc, 
-                     file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points)
+                     file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points, 
+                     compressed_Latex_output=compressed_Latex_output)
 
 
 

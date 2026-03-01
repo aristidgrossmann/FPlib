@@ -60,7 +60,7 @@ optimize_starting_guess = True
 fit1_label = 'constant fit'
 
 plot_uncertainties = True
-
+compressed_Latex_output = True
 
 xlabels = 'x [-]'
 plot1_ylabel = 'y [-]'
@@ -76,4 +76,5 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=x
                                                 optimize_starting_guess=optimize_starting_guess,  
                                                 fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
                                                 plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name)
+                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                compressed_Latex_output = compressed_Latex_output)
