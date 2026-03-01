@@ -74,25 +74,25 @@ optimize_starting_guess = True
 plot_uncertainties = False
 compressed_Latex_output = True
 
-fit1_label = 'Fit'
+fit_label = 'Fit'
 
 xlabels = 'Channel [-]'
 
-plot1_ylabel = 'Counts [-]'
-plot2_ylabel = 'Residuum [-]'
+curveFitPlot_ylabel = 'Counts [-]'
+residualPlot_ylabel = 'Residuum [-]'
 
-plot1_title = 'Peak 2: Gaussian fit'
+plot_title = 'Peak 2: Gaussian fit'
 
-plot1_legend_loc = 'upper right'
+legend_loc = 'upper right'
 
 file_name = "Peak2_singlegauss_fit"
 
 
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
                                                 compressed_Latex_output = compressed_Latex_output)
 
 peak_2_channel_singlegauss = np.array([popt[1], popt_std[1]])   #read out optimized parameters

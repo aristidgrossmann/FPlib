@@ -87,27 +87,27 @@ p0 = [0.25, 3, 1]  #starting guess
 
 optimize_starting_guess = False   
 
-fit1_label = 'gaussian ccdf fit'
+fit_label = 'gaussian ccdf fit'
 
 plot_uncertainties = True
 compressed_Latex_output = True
 
 xlabels = 'Distance [cm]'
-plot1_ylabel = r'Current [$\mu$ A]'
-plot2_ylabel = r'Residuum [$\mu$ A]'
+curveFitPlot_ylabel = r'Current [$\mu$ A]'
+residualPlot_ylabel = r'Residuum [$\mu$ A]'
 
-plot1_title = r'$\alpha-$radiation: ionization current: gaussian ccdf fit'
+plot_title = r'$\alpha-$radiation: ionization current: gaussian ccdf fit'
 
-plot1_legend_loc = 'lower left'
+legend_loc = 'lower left'
 
 file_name = "current_Po214_gaussian_ccdf_fit.pdf"
 
 
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
                                                 compressed_Latex_output = compressed_Latex_output)
 
 

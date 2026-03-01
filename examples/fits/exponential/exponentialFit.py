@@ -82,24 +82,24 @@ p0 = [5000, 0.2]
 
 optimize_starting_guess = True   
 
-fit1_label = 'exponential fit'
+fit_label = 'exponential fit'
 
 plot_uncertainties = True
 compressed_Latex_output = True
 
 xlabels = 'Absorber thickness [mm]'
-plot1_ylabel = 'Counts [-]'
-plot2_ylabel = 'Residuum [-]'
+curveFitPlot_ylabel = 'Counts [-]'
+residualPlot_ylabel = 'Residuum [-]'
 
-plot1_title = r'$\gamma-$radiation absorption in lead: exponential fit'
+plot_title = r'$\gamma-$radiation absorption in lead: exponential fit'
 
-plot1_legend_loc = 'upper right'
+legend_loc = 'upper right'
 
 file_name = "ExponentialFit"
 
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
-                                                compressed_Latex_output=compressed_Latex_output)
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
+                                                compressed_Latex_output = compressed_Latex_output)
