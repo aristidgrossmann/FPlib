@@ -1,5 +1,7 @@
 import os
 
+# converts every .TKA file in a folder to a .txt file
+
 def replace_extension(folder_path):
     # Walk through the folder and its subfolders
     for root, dirs, files in os.walk(folder_path):
@@ -17,11 +19,5 @@ def replace_extension(folder_path):
 
 
 
-
-# Specify the folder path
-folder_path = 'C:/Users/arist/Desktop/WS24_25/Fortgeschrittenenpraktikum/Versuche/T01 (Detektoren & Strahlenschutz)/Daten'
-
-# Call the function to replace extensions
-replace_extension(folder_path)
 
 
