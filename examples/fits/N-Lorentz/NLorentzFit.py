@@ -49,7 +49,7 @@ fit1_label = 'fit'
 
 plot_uncertainties = False
 exclude_zero_count_data_points = True
-
+compressed_Latex_output = True
 
 xlabels = 'Channel [-]'
 plot1_ylabel = 'Count rate [1/s]'
@@ -67,4 +67,5 @@ popt_lorentz, popt_std_lorentz, pcorr = fpfit.general_curve_fit(xdata=xdata, yda
                                                 fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
                                                 plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
                                                 plot1_legend_loc=plot1_legend_loc, 
-                                                file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points)
+                                                file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points, 
+                                                compressed_Latex_output = compressed_Latex_output)

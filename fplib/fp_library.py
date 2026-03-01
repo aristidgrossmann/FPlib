@@ -21,18 +21,9 @@ def inverse_exponential_fit(data, const, char_length):
     return -1/char_length*np.log(data/const)
 
 
-def linear_m1_bias_fit(data, bias):
-    return data + bias*np.ones_like(data)
 
 
 
-
-
-def cos_fit(data, A, omega, phi):
-    return A*np.cos(omega*data + phi)
-
-def lorentz_distribution_plus_C_fit(data, C, A, x0, Gamma):
-    return C+ A/(2*np.pi)*Gamma/((data - x0)**2 + Gamma**2/4)
 
 def N_lorentz_distribution_plus_C_fit(data, *params):
 
@@ -51,14 +42,6 @@ def N_lorentz_distribution_plus_c_times_1_over_sin_2(data, *params):
 
     v_max = np.max(np.abs(data))
     return (1/(1 + params[0]*np.sqrt(1-(data/v_max)**2)))*N_lorentz_distribution_plus_C_fit(data, *params[1:])
-
-
-def abs_cos_fixed_frequency_fit(data, A, phi):
-    omega = 2*np.pi/len(data)
-    return A*np.abs(np.cos(data*omega + phi))
-
-def abs_cos_variable_frequency_fit(data, A, omega, phi):
-    return A*np.abs(np.cos(data*omega + phi))
 
 
 

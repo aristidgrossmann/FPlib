@@ -82,10 +82,9 @@ ydata = current[cutoff_214_Po:]
 xerr = position_std[cutoff_214_Po:]
 yerr = current_std[cutoff_214_Po:]
 
-model = GaussianCCDF  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = GaussianCCDF  #name of the model function 
 p0 = [0.25, 3, 1]  #starting guess
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = False   
 
 fit1_label = 'gaussian ccdf fit'

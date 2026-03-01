@@ -52,10 +52,9 @@ ydata = y_exemplary
 xerr = np.ones_like(xdata)*np.sqrt(1/12)
 yerr = xerr
 
-model = AffineLinear  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = AffineLinear  #name of the model function 
 p0 = [0, 1]  #starting guess
 
-#if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = True   
 
 fit1_label = 'linear fit'

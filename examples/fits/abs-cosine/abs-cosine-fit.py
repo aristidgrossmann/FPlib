@@ -39,14 +39,14 @@ fpplot.plot_raw_data_no_uncertainty(xdata=xdata, ydata=ydata, title=title, xlabe
 
 
 
-
-#########  SPECIFICATIONS   ##########
+############################   MODEL FITTING   #######################
+#SPECIFICATIONS  
 ydata = steel_single_line_velo_calibration
 xdata = np.arange(1, len(ydata)+1)
 xerr = np.ones_like(xdata)*1/np.sqrt(12)
 yerr = ydata*np.sqrt((0.5e-2)**2 + (3.2e-6)**2 + (4e-4)**2) 
 
-model = AbsCosine  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = AbsCosine  #name of the model function 
 p0 =  [875.5, 0.006128, 0.06646]  #starting guess
 
 optimize_starting_guess = True   
