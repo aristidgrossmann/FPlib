@@ -6,7 +6,8 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-from src import fp_library
+print(sys.path)
+from fplib import fpplot
 # endregion
 
 
@@ -42,7 +43,7 @@ file_name = "plotWithXYLims"
 
 
 
-fp_library.plot_raw_data_no_uncertainty(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
+fpplot.plot_raw_data_no_uncertainty(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
                                         legend_loc=legend_loc, xlims=xlims, ylims=ylims, file_name=file_name)
 
 
