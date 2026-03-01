@@ -66,7 +66,7 @@ xlabels = 'x [-]'
 plot1_ylabel = 'y [-]'
 plot2_ylabel = 'Residuum [-]'
 
-plot1_title = 'affine linear fit'
+plot_title = 'affine linear fit'
 
 plot1_legend_loc = 'upper left'
 
@@ -75,6 +75,6 @@ file_name = "affineLinearFit"
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
                                                 fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
+                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot_title=plot_title,  
                                                 plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
                                                 compressed_Latex_output = compressed_Latex_output)

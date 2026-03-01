@@ -12,13 +12,13 @@ from fplib.models.DoubleGaussian import DoubleGaussian
 
 
 def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, optimize_starting_guess,  # data and optimization settings
-                    fit1_label, plot_uncertainties, xlabels, plot1_ylabel, plot2_ylabel, plot1_title, plot1_legend_loc, file_name, 
+                    fit1_label, plot_uncertainties, xlabels, plot1_ylabel, plot2_ylabel, plot_title, plot1_legend_loc, file_name, 
                     xlims = None, ylims = None, #limits on the plot
                     custom_plot = False,   # if true, the plots axis object is returned 
                     peak_index = None, peak1_label = None, peak2_label = None,  #when fitting double gaussian
                     exclude_indices = None, #indices of the data points that are not accounted for when fitting
                     exclude_zero_count_data_points = False,  # exclude 0 counts (they have variance 0 according to Poisson distrib)
-                    compressed_Latex_output = False    # only outputs Fit model name, chi^2 and optimized parameters (no correlation, etc)
+                    compressed_Latex_output = True    # only outputs Fit model name, chi^2 and optimized parameters (no correlation, etc)
                     ):
     
     ###################################################################################
@@ -205,7 +205,7 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
     ax1.set_ylabel(plot1_ylabel, fontsize = 10)
     ax1.tick_params(axis='both', labelsize=10)
     ax1.legend(fontsize = 10, loc = plot1_legend_loc)
-    ax1.set_title(plot1_title + r' ($\chi^2/N_{\mathrm{dof}}$ = ' + f"{chi2_dof:.4g}" + ')', fontsize = 11)
+    ax1.set_title(plot_title + r' ($\chi^2/N_{\mathrm{dof}}$ = ' + f"{chi2_dof:.4g}" + ')', fontsize = 11)
     ax1.grid(True)
 
     # if loglinear fit (exponential fit, but logarithmic y axis)

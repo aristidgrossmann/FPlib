@@ -51,7 +51,7 @@ p0 =  [875.5, 0.006128, 0.06646]  #starting guess
 
 optimize_starting_guess = True   
 
-fit1_label = 'cos fit'
+fit_label = 'cos fit'
 
 plot_uncertainties = False
 exclude_zero_count_data_points = True
@@ -61,22 +61,20 @@ xlims = (0, 1000)
 
 
 xlabels = 'Channel [-]'
-plot1_ylabel = 'Number of fringes [-]'
-plot2_ylabel = 'Residuum [-]'
+curveFitPlot_ylabel = 'Number of fringes [-]'
+residuumPlot_ylabel = 'Residuum [-]'
 
-plot1_title = 'Steel: Velocity calibration: curve fit'
-plot2_title = 'Residuals of cos fit'
+plot_title = 'Steel: Velocity calibration: curve fit'
 
-plot1_legend_loc = 'lower center'
-plot2_legend_loc = 'lower left'
+CurveFitPlot_legend_loc = 'lower center'
 
 file_name = "velocity_calibration_fit"
 
 
 popt_cal, popt_cal_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                fit1_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                plot1_ylabel=curveFitPlot_ylabel, plot2_ylabel=residuumPlot_ylabel, plot_title=plot_title,  
+                                                plot1_legend_loc=CurveFitPlot_legend_loc, file_name=file_name, 
                                                 exclude_zero_count_data_points=exclude_zero_count_data_points,
                                                 compressed_Latex_output=compressed_Latex_output, xlims=xlims)
