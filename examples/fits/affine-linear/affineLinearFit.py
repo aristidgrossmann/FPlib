@@ -8,17 +8,18 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parents[3]))
 
 from fplib import fpplot, fpfit
-from fplib.models.Constant import Constant
+from fplib.models.AffineLinear import AffineLinear
 
 
 
 ############################   DATA LOADING   #######################
-os.chdir('examples/fits/constant/data')
+os.chdir('examples/fits/affine-linear/data')
 
-x_exemplary = np.array([1,2,3,4,5,6,7])
-y_exemplary = np.array([1,2,1,1,1.4, 2, 1])
+x_exemplary = np.array([1,2,3,4,5,6,7,8])
+y_exemplary = np.array([1,2,2.5, 3, 5.5, 6, 7, 8.2])
 
 os.chdir('..')
+
 
 
 
@@ -27,13 +28,13 @@ os.chdir('..')
 #########  SPECIFICATIONS   ##########
 xdata = x_exemplary
 ydata = y_exemplary 
-xerr = np.ones_like(xdata)/10
-yerr = xerr/2
+xerr = np.ones_like(xdata)*np.sqrt(1/12)
+yerr = xerr
 
-title = 'exemplary constant fit'
+title = 'exemplary affine linear fit'
 xlabel = 'x [-]'
 ylabel = 'y [-]'
-legend_loc = 'upper center'
+legend_loc = 'upper left'
 file_name = "rawData"
 
 fpplot.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, title=title, xlabel=xlabel, 
@@ -51,13 +52,13 @@ ydata = y_exemplary
 xerr = np.ones_like(xdata)*np.sqrt(1/12)
 yerr = xerr
 
-model = Constant  #name of the model function 
-p0 = [1]  #starting guess
+model = AffineLinear  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+p0 = [0, 1]  #starting guess
 
 #if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
 optimize_starting_guess = True   
 
-fit1_label = 'constant fit'
+fit1_label = 'linear fit'
 
 plot_uncertainties = True
 
@@ -66,11 +67,11 @@ xlabels = 'x [-]'
 plot1_ylabel = 'y [-]'
 plot2_ylabel = 'Residuum [-]'
 
-plot1_title = 'exemplary constant fit'
+plot1_title = 'affine linear fit'
 
-plot1_legend_loc = 'upper center'
+plot1_legend_loc = 'upper left'
 
-file_name = "constantFit"
+file_name = "affineLinearFit"
 
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
