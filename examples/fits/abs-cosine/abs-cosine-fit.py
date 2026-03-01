@@ -59,10 +59,9 @@ compressed_Latex_output = True
 
 xlims = (0, 1000)
 
-
 xlabels = 'Channel [-]'
 curveFitPlot_ylabel = 'Number of fringes [-]'
-residuumPlot_ylabel = 'Residuum [-]'
+residualPlot_ylabel = 'Residuum [-]'
 
 plot_title = 'Steel: Velocity calibration: curve fit'
 
@@ -73,8 +72,8 @@ file_name = "velocity_calibration_fit"
 
 popt_cal, popt_cal_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=curveFitPlot_ylabel, plot2_ylabel=residuumPlot_ylabel, plot_title=plot_title,  
-                                                plot1_legend_loc=CurveFitPlot_legend_loc, file_name=file_name, 
-                                                exclude_zero_count_data_points=exclude_zero_count_data_points,
-                                                compressed_Latex_output=compressed_Latex_output, xlims=xlims)
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
+                                                compressed_Latex_output = compressed_Latex_output, 
+                                                exclude_zero_count_data_points=exclude_zero_count_data_points)

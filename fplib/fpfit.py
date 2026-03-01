@@ -12,13 +12,13 @@ from fplib.models.DoubleGaussian import DoubleGaussian
 
 
 def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, optimize_starting_guess,  # data and optimization settings
-                    fit1_label, plot_uncertainties, xlabels, plot1_ylabel, plot2_ylabel, plot_title, plot1_legend_loc, file_name, 
+                    fit_label, plot_uncertainties, xlabels, curveFitPlot_ylabel, residualPlot_ylabel, plot_title, legend_loc, file_name, 
                     xlims = None, ylims = None, #limits on the plot
+                    compressed_Latex_output = True,   # only outputs Fit model name, chi^2 and optimized parameters (no correlation, etc)
                     custom_plot = False,   # if true, the plots axis object is returned 
-                    peak_index = None, peak1_label = None, peak2_label = None,  #when fitting double gaussian
                     exclude_indices = None, #indices of the data points that are not accounted for when fitting
                     exclude_zero_count_data_points = False,  # exclude 0 counts (they have variance 0 according to Poisson distrib)
-                    compressed_Latex_output = True    # only outputs Fit model name, chi^2 and optimized parameters (no correlation, etc)
+                    peak_index = None, peak1_label = None, peak2_label = None  #when fitting double gaussian
                     ):
     
     ###################################################################################
@@ -124,18 +124,19 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
 
 
     print('------------------------------')
-    #print correlation
-    print('Correlation:')
-    for i in range(len(popt)):
-        corr_str = ''
-        for j in range(len(popt)):
-            if (j == len(popt)-1):
-                corr_str += f"{pcorr[i][j]:.4g}"
-            else:
-                corr_str += f"{pcorr[i][j]:.4g}" + ' & '
-        print(corr_str)
 
-    print('------------------------------')
+    #print correlation
+    # print('Correlation:')
+    # for i in range(len(popt)):
+    #     corr_str = ''
+    #     for j in range(len(popt)):
+    #         if (j == len(popt)-1):
+    #             corr_str += f"{pcorr[i][j]:.4g}"
+    #         else:
+    #             corr_str += f"{pcorr[i][j]:.4g}" + ' & '
+    #     print(corr_str)
+
+    # print('------------------------------')
 
     # Create the figure and subplots
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(4.5,4), sharex=True, gridspec_kw={'height_ratios': [2.2, 1]})
@@ -198,13 +199,13 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
         ax1.plot(xmodel, ymodel, color = 'red', linewidth = 2, label = 'Total')
 
     else: #for all other models, just plot one line
-        ax1.plot(xmodel, ymodel, color = 'red', linewidth = 2, label = fit1_label)
+        ax1.plot(xmodel, ymodel, color = 'red', linewidth = 2, label = fit_label)
 
 
 
-    ax1.set_ylabel(plot1_ylabel, fontsize = 10)
+    ax1.set_ylabel(curveFitPlot_ylabel, fontsize = 10)
     ax1.tick_params(axis='both', labelsize=10)
-    ax1.legend(fontsize = 10, loc = plot1_legend_loc)
+    ax1.legend(fontsize = 10, loc = legend_loc)
     ax1.set_title(plot_title + r' ($\chi^2/N_{\mathrm{dof}}$ = ' + f"{chi2_dof:.4g}" + ')', fontsize = 11)
     ax1.grid(True)
 
@@ -234,7 +235,7 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
             ax2.scatter(xdata, residuum, s = 8, label = 'Residuals', color = '#9467bd')
 
     ax2.axhline(y = 0, linestyle = '--', linewidth = 1.5, color = 'black')
-    ax2.set_ylabel(plot2_ylabel, fontsize = 10)
+    ax2.set_ylabel(residualPlot_ylabel, fontsize = 10)
     ax2.set_xlabel(xlabels, fontsize = 10)
     ax2.tick_params(axis='both', labelsize=10)
     ax2.grid(True)
@@ -257,4 +258,4 @@ def general_curve_fit(xdata, ydata, xerr, yerr, model:type[ModelTemplate], p0, o
         plt.show()
         return popt, popt_std, pcorr
     else:   #return the ax1 object in addition to allow edits
-        return popt, popt_std, pcorr, ax1
+        return popt, popt_std, pcorr, ax1, ax2

@@ -46,27 +46,27 @@ p0 = [ 300, 1.93498813e+02,  3.37366915e+01,
 
 optimize_starting_guess = False   
 
-fit1_label = 'fit'
+fit_label = 'fit'
 
 plot_uncertainties = False
 exclude_zero_count_data_points = True
 compressed_Latex_output = True
 
 xlabels = 'Channel [-]'
-plot1_ylabel = 'Count rate [1/s]'
-plot2_ylabel = 'Residuum [1/s]'
+curveFitPlot_ylabel = 'Count rate [1/s]'
+residualPlot_ylabel = 'Residuum [1/s]'
 
-plot1_title = 'Z(without absorber): Gaussian fit'
+plot_title = 'Z(without absorber): Gaussian fit'
 
-plot1_legend_loc = 'upper right'
+legend_loc = 'upper right'
 
 file_name = "4GaussiansFit"
 
 
 popt_gauss, popt_std_gauss, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, 
-                                                file_name=file_name, exclude_zero_count_data_points=exclude_zero_count_data_points, 
-                                                compressed_Latex_output = compressed_Latex_output)
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
+                                                compressed_Latex_output = compressed_Latex_output, 
+                                                exclude_zero_count_data_points=exclude_zero_count_data_points)

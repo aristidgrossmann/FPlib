@@ -57,25 +57,25 @@ p0 = [1]  #starting guess
 
 optimize_starting_guess = True   
 
-fit1_label = 'linear fit'
+fit_label = 'linear fit'
 
 plot_uncertainties = True
 compressed_Latex_output = True
 
 
 xlabels = 'x [-]'
-plot1_ylabel = 'y [-]'
-plot2_ylabel = 'Residuum [-]'
+curveFitPlot_ylabel = 'y [-]'
+residualPlot_ylabel = 'Residuum [-]'
 
-plot1_title = 'Linear fit'
+plot_title = 'Linear fit'
 
-plot1_legend_loc = 'upper left'
+legend_loc = 'upper left'
 
 file_name = "LinearFit"
 
 popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
                                                 optimize_starting_guess=optimize_starting_guess,  
-                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                fit_label=fit_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                curveFitPlot_ylabel=curveFitPlot_ylabel, residualPlot_ylabel=residualPlot_ylabel, plot_title=plot_title,  
+                                                legend_loc=legend_loc, file_name=file_name, 
                                                 compressed_Latex_output = compressed_Latex_output)
