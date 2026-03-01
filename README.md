@@ -3,7 +3,7 @@
 ### Purpose and Advantages
 fplib is a data plotting and curve-fitting library. It
 
-- automates the redundant and time-consuming plotting, curve-fitting and Latex-figure-Creation tasks
+- automates the redundant and time-consuming raw data plots, curve-fitting, residual plots and Latex-figure-Creation tasks
 - prints full latex code for curve-fitting figure + results for direct copy-paste into Overleaf
 - specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
 and by extension, the "Fortgeschrittenenpraktikum (FP)"
@@ -29,6 +29,8 @@ Or clone the repository via
 ```bash 
 git clone git@github.com:aristidgrossmann/FPlib.git
 ```
+
+fplib is designed to be easily customized and extended, thats why no build instructions are described here.
 
 
 
@@ -56,8 +58,8 @@ The 4 methods have the following **required arguments**:
 |------|------------|----------------|-----------|
 | `xdata` | all | `np.ndarray` | x data |
 | `ydata` | all | `np.ndarray` | y data |
-| `xerr` | `plot_raw_data_with_uncertainty`, `plot_raw_data_with_uncertainty_zoom_window` | `np.ndarray` | x errors |
-| `yerr` | `plot_raw_data_with_uncertainty`,  `plot_raw_data_with_uncertainty_zoom_window` | `np.ndarray` | y errors |
+| `xerr` | `plot_raw_data_with_uncertainty`, `plot_raw_data_with_uncertainty_zoom_window` | `np.ndarray` | uncertainty on xdata |
+| `yerr` | `plot_raw_data_with_uncertainty`,  `plot_raw_data_with_uncertainty_zoom_window` | `np.ndarray` | uncertainty on ydata |
 | `title` | all | `str` | plot title |
 | `xlabel` | all | `str` | x axis label |
 | `ylabel` | all | `str` | y axis label |
@@ -74,8 +76,90 @@ Additionally, all 4 methods have the following **optional arguments**:
 
 | Argument | Optional for | type |  Description |
 |------|------------|----------------|-----------|
-| `xlims` | all | `tuple` | x axis limits. Default: `None`. set to f.e. (2, 10) |
-| `ylims` | all | `tuple` | y axis limits. Default: `None`. set to f.e. (2, 10) |
+| `xlims` | all | `tuple` | x axis limits. Default: `None`. Can be set to for example (2, 10) |
+| `ylims` | all | `tuple` | y axis limits. Default: `None`. Can be set to for example  (2, 10) |
 | `custom_plot` | all | `boolean` | Default: `False`. Setting to `True` returns the axes object, allowing further modifications |
+
+
+
+
+
+## Curve Fitting
+
+In your script, import `fpfit` via
+
+```python 
+from fplib import fpfit
+```
+Inside `fpfit`, the function  `general_curve_fit` supports all-purpose curve fitting + redidual plots + LaTex figure code generation. 
+The code for LaTex figures is written to a .txt file with the same name as `file_name`.
+
+It has the following **required and optional arguments**: 
+
+| Argument | Required | type |  Description |
+|------|------------|----------------|-----------|
+| `xdata` | yes | `np.ndarray` | x data |
+| `ydata` | yes | `np.ndarray` | y data |
+| `xerr` | yes | `np.ndarray` | uncertainty on xdata |
+| `yerr` | yes | `np.ndarray` | uncertainty on ydata |
+| `model` | yes | `Model` | model class that is fit to the data (see further down) |
+| `p0` | yes | `np.ndarray` | initial guess. Must have the same length as the number of model parameters |
+| `fit1_label` | yes | `str` | label of the fit line (in the legend) |
+| `plot_uncertainties` | yes | `boolean` | `True`: plots uncertainties. `False`: only data points without error bars    |
+| `xlabels` | yes | `str` | x axis label |
+| `plot1_ylabel` | yes | `str` | y axis label of the fit plot |
+| `plot2_ylabel` | yes | `str` | y axis label of the Residual plot |
+| `plot1_title` | yes | `str` | Title of the plot |
+| `plot1_legend_loc` | yes | `str` | location of the zoom window, f.e.  `upper center`  (see matplotlib for options) |
+| `file_name` | yes | `str` | file name under which the plot and the Latex figure code is saved |
+| `xlims` | optional | `tuple` | x axis limits. Default: `None`. Can be set to for example (2, 10) |
+| `ylims` | optional | `tiple` | y axis limits of the top plot. Default: `None`. Can be set to for example (2, 10) |
+| `custom_plot` | optional | `boolean` | Default: `False`. Setting to `True` returns the axes object, allowing further modifications |
+| `peak_index` | optional | `int` | Only used when fitting `DoubleGaussian`. Can be set to `0` or `1` to specify which peak is the background|
+| `peak1_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
+| `peak2_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
+| `exclude_indices` | yes | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
+| `exclude_zero_count_data_points` | optional | 'boolean | Default: `False`. Set to `True` when working with count data (since 0-counts have zero uncertainty)  |
+| `compressed_Latex_output` | optional | `bool` | Default: `True`. Setting to `False` prints more curve fit info (f.e. correlation) to the Latex txt output  |
+
+
+
+### Models
+
+There already are a lot of pre-defined models in the `models` folder. However, custom models can also be defined easily. 
+Here an example, which defines the custom model $f(x) = A \cos^2(\omega x + \phi) + a_0 + a_1 x + a_2 x^2$ with the model parameters 
+$A, \omega, \phi, a_0, a_1, a_2$
+
+```python 
+from fplib.ModelTemplate import ModelTemplate
+import numpy as np
+
+class CustomModel(ModelTemplate)  #inherit from ModelTemplate
+
+    # Model description (must me specified)
+    MODEL_NAME = 'Custom Model'   
+    MODEL_EQUATION_LATEX = "f(x) = A \cos^2(\omega x + \phi) + a_0 + a_1 x + a_2 x^2"
+    MODEL_PARAMETER_LABELS = ["$A$", "$\\omega$", "$\\phi$", "$a_0$", "$a_1$", "$a_2$"]
+
+    @staticmethod
+    def modelFunction(data, A, omega, phi, a_0, a_1, a_2):   #must be in the order data, *params
+        return A * np.cos(omega *data + phi) + a_0 + a_1 *x + a_2 * x**2
+    
+    @staticmethod
+    def modelFunctionDerivative(data, C, mu, sigma):   #must be in the order data, *params
+        return - A*omega* np.sin(omega *data + phi)  + a_1 + 2*a_2
+```
+After that, you can simply import your model and pass it to the all-purpose curve fit function `fpfit.general_curve_fit`. For example, if your model is inside a file named `CustomModel.py` inside the `models` folder, simply import it via 
+```python 
+from fplib.models.CustomModel import CustomModel
+```
+
+The LaTex figure code generation is automated for all models inheriting from `ModelTemplate`, but if you wish to implement a custom Result formatting, simply overwrite the `@classmethod` `print_curve_fit_popt_general` (for example as in `DoubleGaussian`). 
+
+Also, if you define a model whose number of input parameters is not fixed, you have to overwrite the `@classmethod` `getModelParameterLabels` (for example as in `NGaussians`). 
+
+
+
+
 
 
