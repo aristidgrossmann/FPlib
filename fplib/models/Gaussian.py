@@ -4,7 +4,7 @@ import numpy as np
 class Gaussian(ModelTemplate):
 
     MODEL_NAME = 'Gaussian'
-    MODEL_EQUATION_LATEX = "f(x) = C*\\exp(-\\frac{(x - \\mu)^2}{2 \\sigma^2})"
+    MODEL_EQUATION_LATEX = "f(x) = C e^{-\\frac{(x - \\mu)^2}{2 \\sigma^2}}"
     MODEL_PARAMETER_LABELS = ["$C$", "$\\mu$", "\\sigma"]
     
     @staticmethod
@@ -12,7 +12,7 @@ class Gaussian(ModelTemplate):
         gauss = C*np.exp(-(data-mu)**2 / (2*sigma**2))
         return gauss
     
-    @classmethod
-    def modelFunctionDerivative(cls, data, C, mu, sigma):
+    @staticmethod
+    def modelFunctionDerivative(data, C, mu, sigma):
         return C * np.exp(-(data - mu)**2 / (2 * sigma**2)) * (-(data - mu) / sigma**2)
         

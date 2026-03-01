@@ -10,6 +10,6 @@ class AffineLinear(ModelTemplate):
     def modelFunction(data, a, b):
         return a*data + b
 
-    @classmethod
-    def modelFunctionDerivative(cls, data, a, b):
+    @staticmethod
+    def modelFunctionDerivative(data, a, b):
         return a

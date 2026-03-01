@@ -11,6 +11,6 @@ class Exponential(ModelTemplate):
     def modelFunction(data, C, mu):
         return C*np.exp(-data*mu)
     
-    @classmethod
-    def modelFunctionDerivative(cls, data, C, mu):
+    @staticmethod
+    def modelFunctionDerivative(data, C, mu):
         return -mu*C*np.exp(-data*mu)

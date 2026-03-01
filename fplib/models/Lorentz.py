@@ -11,7 +11,7 @@ class Lorentz(ModelTemplate):
     def modelFunction(data, C, x0, gamma):
         return C/(2*np.pi)*gamma/((data - x0)**2 + gamma**2/4)
     
-    @classmethod
-    def modelFunctionDerivative(cls, data, C, x0, gamma):
+    @staticmethod
+    def modelFunctionDerivative(data, C, x0, gamma):
         return - C*gamma*(data-x0)/(np.pi*((data - x0)**2 + gamma**2/4)**2)
         

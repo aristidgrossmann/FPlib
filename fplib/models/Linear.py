@@ -1,4 +1,5 @@
 from fplib.models.ModelTemplate import ModelTemplate
+import numpy as np
 
 class Linear(ModelTemplate):
 
@@ -10,6 +11,6 @@ class Linear(ModelTemplate):
     def modelFunction(data, a):
         return a*data
 
-    @classmethod
-    def modelFunctionDerivative(cls, data, a):
-        return a
+    @staticmethod
+    def modelFunctionDerivative(data, a):
+        return a*np.ones_like(data)
