@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-from src import fp_library
+from fplib import fpplot
 
 
 
@@ -62,6 +62,6 @@ ylabel = 'Counts [-]'
 legend_loc = 'upper right'
 file_name = "withUncertainties"
 
-fp_library.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, title=title, xlabel=xlabel, 
+fpplot.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, title=title, xlabel=xlabel, 
                                           ylabel=ylabel, legend_loc=legend_loc, file_name=file_name)
 

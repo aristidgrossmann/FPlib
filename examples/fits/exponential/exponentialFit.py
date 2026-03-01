@@ -6,7 +6,8 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-from src import fp_library
+from fplib import fpplot, fpfit
+from fplib.models.Exponential import Exponential
 
 
 
@@ -61,7 +62,7 @@ ylabel = 'Counts [-]'
 legend_loc = 'upper right'
 file_name = "rawCounts"
 
-fp_library.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, title=title, xlabel=xlabel, 
+fpplot.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, title=title, xlabel=xlabel, 
                                           ylabel=ylabel, legend_loc=legend_loc, file_name=file_name)
 
 
@@ -76,7 +77,7 @@ ydata = noof_counts
 xerr = thickness_uncertainties
 yerr = np.sqrt(noof_counts)
 
-model = fp_library.exponential_fit  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
+model = Exponential  #name of the model function (supported: linear_fit, exponential_fit, inverse_exponential_fit, gaussian_fit, double_gaussian_fit)
 p0 = [5000, 0.2]  #starting guess
 
 #if true, a curvefit without uncertainties is performed. the result is taken as the new starting guess. Aims at improving convergence
@@ -86,22 +87,22 @@ fit1_label = 'exponential fit'
 
 plot_uncertainties = True
 
+compressed_Latex_output = True
+
 
 xlabels = 'Absorber thickness [mm]'
 plot1_ylabel = 'Counts [-]'
 plot2_ylabel = 'Residuum [-]'
 
 plot1_title = r'$\gamma-$radiation absorption in lead: exponential fit'
-plot2_title = 'Residuals of exponential fit'
 
 plot1_legend_loc = 'upper right'
-plot2_legend_loc = 'lower right'
 
 file_name = "ExponentialFit"
 
-popt, popt_std, pcorr = fp_library.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
-                                                    optimize_starting_guess=optimize_starting_guess,  
-                                                    fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
-                                                    plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
-                                                    plot2_title=plot2_title, plot1_legend_loc=plot1_legend_loc, plot2_legend_loc=plot2_legend_loc, 
-                                                    file_name=file_name)
+popt, popt_std, pcorr = fpfit.general_curve_fit(xdata=xdata, ydata=ydata, xerr=xerr, yerr=yerr, model=model, p0=p0, 
+                                                optimize_starting_guess=optimize_starting_guess,  
+                                                fit1_label=fit1_label, plot_uncertainties=plot_uncertainties, xlabels=xlabels, 
+                                                plot1_ylabel=plot1_ylabel, plot2_ylabel=plot2_ylabel, plot1_title=plot1_title,  
+                                                plot1_legend_loc=plot1_legend_loc, file_name=file_name, 
+                                                compressed_Latex_output=compressed_Latex_output)

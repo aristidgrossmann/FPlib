@@ -6,7 +6,8 @@ from matplotlib import pyplot as plt
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[3]))
-from src import fp_library
+
+from fplib import fpplot
 # endregion
 
 
@@ -18,7 +19,8 @@ organic_data = np.genfromtxt('Organic Szin.txt')
 channels = np.arange(1, len(organic_data)+1)
 
 
-os.chdir('..')
+os.chdir('../..')
+os.chdir('xyLimits')
 
 
 
@@ -42,7 +44,7 @@ file_name = "plotWithXYLims"
 
 
 
-fp_library.plot_raw_data_no_uncertainty(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
+fpplot.plot_raw_data_no_uncertainty(xdata=xdata, ydata=ydata, title=title, xlabel=xlabel, ylabel=ylabel, 
                                         legend_loc=legend_loc, xlims=xlims, ylims=ylims, file_name=file_name)
 
 
