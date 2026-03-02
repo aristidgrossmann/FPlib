@@ -174,7 +174,7 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 | `ylims` | optional | `tiple` | y axis limits of the top plot. Default: `None`. Can be set to for example (2, 10) |
 | `compressed_Latex_output` | optional | `bool` | Default: `True`. Setting to `False` prints more curve fit info (f.e. correlation) to the Latex txt output  |
 | `custom_plot` | optional | `boolean` | Default: `False`. Setting to `True` returns the axes objects of the curve fit and the residual plots, allowing further modifications |
-| `exclude_indices` | yes | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
+| `exclude_indices` | optional | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
 | `exclude_zero_count_data_points` | optional | 'boolean | Default: `False`. Set to `True` when working with count data (since 0-counts have zero uncertainty)  |
 | `peak_index` | optional | `int` | Only used when fitting `DoubleGaussian`. Can be set to `0` or `1` to specify which peak is the background|
 | `peak1_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
