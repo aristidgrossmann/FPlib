@@ -206,7 +206,7 @@ class CustomModel(ModelTemplate)  #inherit from ModelTemplate
         return A * np.cos(omega *data + phi)**2 + a_0 + a_1 *x + a_2 * x**2
     
     @staticmethod
-    def modelFunctionDerivative(data, C, mu, sigma):   #must be in the order data, *params
+    def modelFunctionDerivative(data, A, omega, phi, a_0, a_1, a_2):    #must be in the order data, *params
         return - 2*A*omega* np.sin(omega *data + phi)*np.cos(omega *data + phi)  + a_1 + 2*a_2
 ```
 After that, you can simply import your model and pass it to the all-purpose curve fit function `fpfit.general_curve_fit`. For example, if your model is inside a file named `CustomModel.py` inside the `models` folder, simply import it via 
