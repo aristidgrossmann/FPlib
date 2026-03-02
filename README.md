@@ -92,7 +92,7 @@ The 4 methods have the following **required arguments**:
 | `file_name` | all | `str` | name under which the plot is saved |
 | `zoom_xlim` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | x range of the zoom region |
 | `zoom_ylim` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | y range of the zoom region |
-| `scaling_factor` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `float` | scales the size of the zoom window |
+| `scaling_factor` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `float` | scales the size of the zoom window. If set to `0`, only the red rectangle is drawn around the specified region, which can be used to mark certain measurements (f.e. peaks) |
 | `zoom_window_position` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | location of the zoom window, f.e.  `upper center`  (see matplotlib for options) |
 
 
