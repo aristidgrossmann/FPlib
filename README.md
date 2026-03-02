@@ -161,7 +161,8 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 | `yerr` | yes | `np.ndarray` | uncertainty on ydata |
 | `model` | yes | `Model` | model class that is fit to the data (see further down) |
 | `p0` | yes | `np.ndarray` | initial guess. Must have the same length as the number of model parameters |
-| `fit1_label` | yes | `str` | label of the fit line (in the legend) |
+| `optimize_starting_guess` | yes | `bool` | If `True`: generates an optimized starting guess by solving the curve fitting problem without accounting for uncertainties (generally more stable, because each data point has the same weight)  |
+| `fit_label` | yes | `str` | label of the fit line (in the legend) |
 | `plot_uncertainties` | yes | `boolean` | `True`: plots uncertainties. `False`: only data points without error bars    |
 | `xlabels` | yes | `str` | x axis label |
 | `curveFitPlot_ylabel` | yes | `str` | y axis label of the fit plot |
