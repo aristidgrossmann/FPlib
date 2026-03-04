@@ -19,6 +19,12 @@ os.chdir('examples/fits/N-Gaussian/data')
 background_noise_spectrum = np.genfromtxt('Rauschmessung.txt', skip_header = 0)/(15*60)
 Z_without_absorber = np.genfromtxt('without_absorber_without_velocity.txt')/(30*60)
 
+ydata = Z_without_absorber[0:len(background_noise_spectrum)] - background_noise_spectrum*2 
+xdata = np.arange(1, len(ydata)+1)
+
+lb = 0
+ub = 700
+
 os.chdir('..')
 
 
@@ -27,14 +33,10 @@ os.chdir('..')
 
 ############################   FIT SUM OF N GAUSSIAN DISTRIBUTIONS   #######################################
 
-lb = 0
-ub = 700
-
 #SPECIFICATIONS 
-ydata = Z_without_absorber[0:len(background_noise_spectrum)] - background_noise_spectrum*2 
-xdata = np.arange(1, len(ydata)+1)
-ydata = ydata[lb:ub]
 xdata = xdata[lb:ub]
+ydata = ydata[lb:ub]
+
 xerr = np.ones_like(xdata)*1/np.sqrt(12)
 yerr = np.sqrt(ydata)*1
 
