@@ -4,10 +4,11 @@
 fplib is a data plotting and curve-fitting library. It
 
 - automates the redundant and time-consuming raw data plots, curve-fitting, residual plots and Latex-figure-Creation tasks
+into ~10 lines which can simply be copy-pasted every time
 - prints full latex code for curve-fitting figure + results for direct copy-paste into Overleaf
-- specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
+- is specifically tailored to comply with the formatting regulations of the "Grundpraktikum (GP)", 
 and by extension, the "Fortgeschrittenenpraktikum (FP)"
-- lots of pre-defined models, but also enables easy custom model definitions
+- has lots of pre-defined models, but also enables easy custom model definitions
 
 From the FP lectures, it copies exactly the color scheme, font size, figure format and size, labels, and 
 lists optimized parameter results and $\chi^2 /N_{dof}$ in a structured way. 
@@ -91,7 +92,7 @@ The 4 methods have the following **required arguments**:
 | `file_name` | all | `str` | name under which the plot is saved |
 | `zoom_xlim` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | x range of the zoom region |
 | `zoom_ylim` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | y range of the zoom region |
-| `scaling_factor` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `float` | scales the size of the zoom window |
+| `scaling_factor` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `float` | scales the size of the zoom window. If set to `0`, only the red rectangle is drawn around the specified region, which can be used to mark certain measurements (f.e. peaks) |
 | `zoom_window_position` | `plot_raw_data_no_uncertainty_zoom_window`, `plot_raw_data_with_uncertainty_zoom_window` | `str` | location of the zoom window, f.e.  `upper center`  (see matplotlib for options) |
 
 
@@ -109,6 +110,26 @@ Additionally, all 4 methods have the following **optional arguments**:
 
 
 ## Curve Fitting
+
+
+### Methodology
+
+In analogy to the `Praktikumsbibliothek` provided for the GP (see https://grundpraktikum.physik.rwth-aachen.de/software/), curve fits of a function $f(x|\boldsymbol{a})$ with parameters $\boldsymbol{a}$ on data with uncertainty only on the y-value $\sigma_y$ by minimizing 
+$\chi^2 = \sum_i \frac{(y_i - f(x_i|\boldsymbol{a}))^2}{\sigma_{y,i}^2}$.
+The function $\mathrm{scipy.optimize.curve \\_fit}$ is used to solve the minimization problem. 
+
+When presented with uncertainty in the x and y values simultaneously, the Orthogonal Distance Regression (ODR) method  is used, which minimizes a similar objective function. To solve the minimization problem numerically, the algorithm $\mathrm{scipy.odr}$ in analogy to the `Praktikumsbibliothek` is utilized.
+
+In accordance with the GP protocol guidelines, the fit parameters and their standard deviations are reported. After consulting the FP advisors, correlations are not reported.
+
+To quantify the quality of our fit, the value for normalized
+$\chi^2/N_{\mathrm{dof}} = \frac{1}{N_{\mathrm{dof}}}\sum_i \frac{(y_i - f(x_i|\textbf{a}))^2}{\sigma_{y,i}^2 + (f'(x_i|\textbf{a})\sigma_{x,i})^2}$ is reported.
+
+
+Additionally, the residuals $y_i - f(x_i|\textbf{a})$ with the uncertainty $\sqrt{\sigma_{y,i}^2 + (f'(x_i|\textbf{a})\sigma_{x,i})^2}$ are plotted, in analogy to the GP guidelines.
+
+
+### fpfit
 
 In your script, import `fpfit` via
 
@@ -140,7 +161,8 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 | `yerr` | yes | `np.ndarray` | uncertainty on ydata |
 | `model` | yes | `Model` | model class that is fit to the data (see further down) |
 | `p0` | yes | `np.ndarray` | initial guess. Must have the same length as the number of model parameters |
-| `fit1_label` | yes | `str` | label of the fit line (in the legend) |
+| `optimize_starting_guess` | yes | `bool` | If `True`: generates an optimized starting guess by solving the curve fitting problem without accounting for uncertainties (generally more stable, because each data point has the same weight)  |
+| `fit_label` | yes | `str` | label of the fit line (in the legend) |
 | `plot_uncertainties` | yes | `boolean` | `True`: plots uncertainties. `False`: only data points without error bars    |
 | `xlabels` | yes | `str` | x axis label |
 | `curveFitPlot_ylabel` | yes | `str` | y axis label of the fit plot |
@@ -152,7 +174,7 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 | `ylims` | optional | `tiple` | y axis limits of the top plot. Default: `None`. Can be set to for example (2, 10) |
 | `compressed_Latex_output` | optional | `bool` | Default: `True`. Setting to `False` prints more curve fit info (f.e. correlation) to the Latex txt output  |
 | `custom_plot` | optional | `boolean` | Default: `False`. Setting to `True` returns the axes objects of the curve fit and the residual plots, allowing further modifications |
-| `exclude_indices` | yes | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
+| `exclude_indices` | optional | `np.ndarray` | Indices of the data points that are excluded when fitting. Data points are still plotted though |
 | `exclude_zero_count_data_points` | optional | 'boolean | Default: `False`. Set to `True` when working with count data (since 0-counts have zero uncertainty)  |
 | `peak_index` | optional | `int` | Only used when fitting `DoubleGaussian`. Can be set to `0` or `1` to specify which peak is the background|
 | `peak1_label` | optional | `str` | Only used when fitting `DoubleGaussian`. Label of the first peak|
@@ -162,7 +184,7 @@ popt, popt_std, pcorr = fpfit.general_curve_fit(....)
 ---
 
 
-### Models
+## Models
 
 There already are a lot of pre-defined models in the `models` folder. However, custom models can also be defined easily. 
 Here an example, which defines the custom model $f(x) = A \cos^2(\omega x + \phi) + a_0 + a_1 x + a_2 x^2$ with the model parameters 
@@ -181,11 +203,11 @@ class CustomModel(ModelTemplate)  #inherit from ModelTemplate
 
     @staticmethod
     def modelFunction(data, A, omega, phi, a_0, a_1, a_2):   #must be in the order data, *params
-        return A * np.cos(omega *data + phi) + a_0 + a_1 *x + a_2 * x**2
+        return A * np.cos(omega *data + phi)**2 + a_0 + a_1 *x + a_2 * x**2
     
     @staticmethod
-    def modelFunctionDerivative(data, C, mu, sigma):   #must be in the order data, *params
-        return - A*omega* np.sin(omega *data + phi)  + a_1 + 2*a_2
+    def modelFunctionDerivative(data, A, omega, phi, a_0, a_1, a_2):    #must be in the order data, *params
+        return - 2*A*omega* np.sin(omega *data + phi)*np.cos(omega *data + phi)  + a_1 + 2*a_2
 ```
 After that, you can simply import your model and pass it to the all-purpose curve fit function `fpfit.general_curve_fit`. For example, if your model is inside a file named `CustomModel.py` inside the `models` folder, simply import it via 
 ```python 
@@ -195,6 +217,8 @@ from fplib.models.CustomModel import CustomModel
 The LaTex figure code generation is automated for all models inheriting from `ModelTemplate`, but if you wish to implement a custom Result formatting, simply overwrite the `@classmethod` `print_curve_fit_popt_general` (for example as in `DoubleGaussian`). 
 
 Also, if you define a model whose number of input parameters is not fixed, you have to overwrite the `@classmethod` `getModelParameterLabels` (for example as in `NGaussians`). 
+
+
 
 
 
