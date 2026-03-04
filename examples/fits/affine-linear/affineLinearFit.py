@@ -45,7 +45,7 @@ fpplot.plot_raw_data_with_uncertainty(xdata=xdata, ydata=ydata, xerr=xerr, yerr=
 
 
 
-############################   FIT EXPONTENTIAL FUNCTION   #######################################
+############################   FIT ax + b FUNCTION   #######################################
 #########  SPECIFICATIONS   ##########
 xdata = x_exemplary
 ydata = y_exemplary 
